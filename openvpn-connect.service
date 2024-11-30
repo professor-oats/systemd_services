@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenVPN Connection for .ovpn 
+After=network.target set-netinterfaces.service
+Requires=set-netinterfaces.service
+
+[Service]
+ExecStart=/usr/bin/openvpn --config /home/codewriter/OpenVPNConfigs/yourvpnconf.ovpn --auth-user-pass /home/codewriter/OpenVPNConfigs/yourauth.txt
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
